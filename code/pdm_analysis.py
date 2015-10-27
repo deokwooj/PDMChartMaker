@@ -4,7 +4,9 @@ Created on Wed Sep 30 23:24:03 2015
 
 @author: deokwooj
 """
+
 from __future__ import division # To forace float point division
+import os
 from pdm_config import *
 from scipy.fftpack import fft, dct
 from sklearn import cluster
@@ -270,5 +272,17 @@ def analyzeSeriesWithName(seriesName):
     })
 
 
+def analyzeAll():
+    names = []
+    for filename in os.listdir('data_in'):
+        if '_x.txt' in filename:
+            name = filename.replace('_x.txt', '')
+            names.append(name)
+
+    for name in names:
+        analyzeSeriesWithName(name)
+
+
 if __name__ == '__main__':
-    analyzeSeriesWithName('foo')
+    analyzeAll()
+    
